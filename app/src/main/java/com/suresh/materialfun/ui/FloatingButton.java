@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.EmbossMaskFilter;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
@@ -43,23 +42,8 @@ public class FloatingButton extends View {
     }
 
     private void init() {
-        //Setting layer type to software to make the emboss effect work
-        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-
         btnPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         btnPaint.setColor(btnColor);
-
-        //Emboss filter to give the button a top-down 3D lighting effect
-        if (!isInEditMode()) { //Not supported in IDE preview
-            float[] scalars = { 0, 0.5f, 0.5f };
-            EmbossMaskFilter filter = new EmbossMaskFilter(
-                    scalars,
-                    0.0f,
-                    8f,
-                    3f
-            );
-            btnPaint.setMaskFilter(filter);
-        }
     }
 
     @Override
@@ -75,7 +59,7 @@ public class FloatingButton extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawOval(circleRect, btnPaint);
-//        btnIcon.draw(canvas);
+        btnIcon.draw(canvas);
     }
 
     public int getButtonColor() {
