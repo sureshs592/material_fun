@@ -13,11 +13,12 @@
         android:layout_height="wrap_content" />
 
     <com.suresh.materialfun.ui.FloatingButton
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        app:fb_buttonColor="#ffff2621"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fb_buttonColor="#ffcc1d19"
         app:fb_icon="@drawable/ic_action_new"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>
