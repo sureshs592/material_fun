@@ -15,7 +15,8 @@
     <com.suresh.materialfun.ui.FloatingButton
         android:layout_width="56dp"
         android:layout_height="56dp"
-        app:buttonColor="#ffff003e"
+        app:fb_buttonColor="#ffff003e"
+        app:fb_icon="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
 

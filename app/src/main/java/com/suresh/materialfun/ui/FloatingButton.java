@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -13,13 +14,15 @@ import com.suresh.materialfun.R;
 
 public class FloatingButton extends View {
 
+    private final String TAG = "FloatingButton";
+
     //Drawing tools
     private Paint btnPaint;
 
     //Button attributes
     private int btnColor;
-    private int btnDiameter;
-    private RectF btnCircle;
+    private Drawable btnIcon;
+    private RectF circleRect;
 
 
     public FloatingButton(Context context, AttributeSet attrs) {
@@ -28,7 +31,9 @@ public class FloatingButton extends View {
         TypedArray arr = context.getTheme().obtainStyledAttributes(attrs, R.styleable.FloatingButton, 0, 0);
 
         try {
-            btnColor = arr.getColor(R.styleable.FloatingButton_buttonColor, Color.BLACK);
+            btnColor = arr.getColor(R.styleable.FloatingButton_fb_buttonColor, Color.BLACK);
+            int iconRes = arr.getResourceId(R.styleable.FloatingButton_fb_icon, 0);
+            if (iconRes != 0) btnIcon = getResources().getDrawable(iconRes);
         } finally {
             arr.recycle();
         }
@@ -46,13 +51,15 @@ public class FloatingButton extends View {
         int width = w - getPaddingLeft() - getPaddingRight();
         int height = h - getPaddingTop() - getPaddingBottom();
 
-        btnDiameter = Math.min(width, height);
-        btnCircle = new RectF(0, 0, btnDiameter, btnDiameter);
+        int diameter = Math.min(width, height);
+        circleRect = new RectF(0, 0, diameter, diameter);
+        btnIcon.setBounds(0, 0, diameter, diameter);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawOval(btnCircle, btnPaint);
+        canvas.drawOval(circleRect, btnPaint);
+        btnIcon.draw(canvas);
     }
 
     public int getButtonColor() {
