@@ -2,6 +2,7 @@ package com.suresh.materialfun.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -20,11 +21,13 @@ public class FloatingButton extends View {
 
     //Drawing tools
     private Paint btnPaint;
+    private Paint shadowPaint;
 
     //Button attributes
     private int btnColor;
     private Drawable btnIcon;
-    private RectF circleRect;
+    private RectF btnCircleRect;
+    private RectF shadowCircleRect;
     private int btnSize;
     private final float BTN_SIZE_DP = 56f;
 
@@ -47,6 +50,9 @@ public class FloatingButton extends View {
     }
 
     private void init(Context context) {
+        //Setting layer type to SOFTWARE to make the blur mask filter work (for shadow)
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+
         //Initialising button background paint
         btnPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         btnPaint.setColor(btnColor);
@@ -54,6 +60,11 @@ public class FloatingButton extends View {
         //Calculating button size
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         btnSize = (int)((BTN_SIZE_DP * displayMetrics.density) + 0.5);
+
+        //Initialising the shadow paint
+        shadowPaint = new Paint(0);
+        shadowPaint.setColor(Color.argb(255 , 120, 120, 120));
+        shadowPaint.setMaskFilter(new BlurMaskFilter(10, BlurMaskFilter.Blur.NORMAL));
     }
 
     @Override
@@ -61,7 +72,11 @@ public class FloatingButton extends View {
         int viewPadding = calculateViewPadding();
         int btnStart = viewPadding;
         int btnEnd = viewPadding + btnSize;
-        circleRect = new RectF(btnStart, btnStart, btnEnd, btnEnd);
+        btnCircleRect = new RectF(btnStart, btnStart, btnEnd, btnEnd);
+
+        int positionOffset = 5, sizeOffset = 2;
+        shadowCircleRect = new RectF(btnStart + sizeOffset, btnStart + positionOffset,
+                btnEnd - sizeOffset, btnEnd + positionOffset);
 
         int iconPadding = (int) (btnSize * 0.3);
         int iconStart = btnStart + iconPadding;
@@ -79,7 +94,8 @@ public class FloatingButton extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawOval(circleRect, btnPaint);
+        canvas.drawOval(shadowCircleRect, shadowPaint);
+        canvas.drawOval(btnCircleRect, btnPaint);
         btnIcon.draw(canvas);
     }
 
