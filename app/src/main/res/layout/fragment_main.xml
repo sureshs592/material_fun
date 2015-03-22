@@ -9,8 +9,15 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity$PlaceholderFragment">
 
-    <TextView android:id="@+id/section_label" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/section_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Testing"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:background="@drawable/label_bg_thin"
+        android:textSize="14sp" />
 
     <com.suresh.materialfun.ui.FloatingButton
         android:layout_width="wrap_content"
