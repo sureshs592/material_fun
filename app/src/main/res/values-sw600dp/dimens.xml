@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Floating button dimens -->
+    <dimen name="fb_button_size">72dp</dimen>
+    <dimen name="fb_icon_size">28dp</dimen>
+
+</resources>

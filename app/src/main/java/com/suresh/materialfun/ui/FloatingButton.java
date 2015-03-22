@@ -26,13 +26,13 @@ public class FloatingButton extends View {
     //Button attributes
     private int btnColor;
     private int btnSize;
-    private final float BTN_SIZE_DP = 56f;
+    private float BTN_SIZE_DP;
     private RectF btnCircleRect;
 
     //Icon attributes
     private Drawable btnIcon;
     private int btnIconSize;
-    private final float BTN_ICON_SIZE_DP = 24f;
+    private float BTN_ICON_SIZE_DP;
 
     //Shadow attributes
     private RectF shadowCircleRect;
@@ -78,10 +78,8 @@ public class FloatingButton extends View {
     }
 
     private void setupDimensions(Context context) {
-        //Calculating button size
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        btnSize = (int)((BTN_SIZE_DP * displayMetrics.density) + 0.5);
-        btnIconSize = (int)((BTN_ICON_SIZE_DP * displayMetrics.density) + 0.5);
+        btnSize = (int) context.getResources().getDimension(R.dimen.fb_button_size);
+        btnIconSize = (int) context.getResources().getDimension(R.dimen.fb_icon_size);
     }
 
     @Override
