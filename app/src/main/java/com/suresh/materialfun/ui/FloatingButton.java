@@ -94,9 +94,9 @@ public class FloatingButton extends View {
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        int viewPadding = calculateViewPadding();
+        int viewPadding = (int) (w * 0.2);
         int btnStart = viewPadding;
-        int btnEnd = viewPadding + btnSize;
+        int btnEnd = btnStart + (int) (w * 0.6);
         btnCircleRect = new RectF(btnStart, btnStart, btnEnd, btnEnd);
 
         int positionOffset = 5, sizeOffset = 2;
@@ -104,7 +104,7 @@ public class FloatingButton extends View {
                 btnEnd - sizeOffset, btnEnd + positionOffset);
 
         if (btnIcon != null) {
-            int iconPadding = (int) (btnSize * 0.3);
+            int iconPadding = (int) ((btnEnd - btnStart) * 0.3);
             int iconStart = btnStart + iconPadding;
             int iconEnd = btnEnd - iconPadding;
             btnIcon.setBounds(iconStart, iconStart, iconEnd, iconEnd);
