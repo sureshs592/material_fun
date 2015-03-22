@@ -9,7 +9,6 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
@@ -26,13 +25,11 @@ public class FloatingButton extends View {
     //Button attributes
     private int btnColor;
     private int btnSize;
-    private float BTN_SIZE_DP;
     private RectF btnCircleRect;
 
     //Icon attributes
-    private Drawable btnIcon;
-    private int btnIconSize;
-    private float BTN_ICON_SIZE_DP;
+    private Drawable icon;
+    private int iconSize;
 
     //Shadow attributes
     private RectF shadowCircleRect;
@@ -47,7 +44,7 @@ public class FloatingButton extends View {
         try {
             btnColor = arr.getColor(R.styleable.FloatingButton_fb_buttonColor, Color.BLACK);
             int iconRes = arr.getResourceId(R.styleable.FloatingButton_fb_icon, 0);
-            if (iconRes != 0) btnIcon = getResources().getDrawable(iconRes);
+            if (iconRes != 0) icon = getResources().getDrawable(iconRes);
         } finally {
             arr.recycle();
         }
@@ -79,7 +76,7 @@ public class FloatingButton extends View {
 
     private void setupDimensions(Context context) {
         btnSize = (int) context.getResources().getDimension(R.dimen.fb_button_size);
-        btnIconSize = (int) context.getResources().getDimension(R.dimen.fb_icon_size);
+        iconSize = (int) context.getResources().getDimension(R.dimen.fb_icon_size);
     }
 
     @Override
@@ -93,8 +90,7 @@ public class FloatingButton extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         int canvasSize = Math.min(w, h);
-        int viewPadding = (int) (canvasSize * 0.2);
-        int btnStart = viewPadding;
+        int btnStart = (int) (canvasSize * 0.2);
         int btnEnd = btnStart + (int) (canvasSize * 0.6);
         btnCircleRect = new RectF(btnStart, btnStart, btnEnd, btnEnd);
 
@@ -102,11 +98,11 @@ public class FloatingButton extends View {
         shadowCircleRect = new RectF(btnStart + sizeOffset, btnStart + positionOffset,
                 btnEnd - sizeOffset, btnEnd + positionOffset);
 
-        if (btnIcon != null) {
+        if (icon != null) {
             int midPoint = canvasSize / 2;
-            int iconStart = midPoint - (btnIconSize / 2);
-            int iconEnd = iconStart + btnIconSize;
-            btnIcon.setBounds(iconStart, iconStart, iconEnd, iconEnd);
+            int iconStart = midPoint - (iconSize / 2);
+            int iconEnd = iconStart + iconSize;
+            icon.setBounds(iconStart, iconStart, iconEnd, iconEnd);
         }
     }
 
@@ -119,7 +115,7 @@ public class FloatingButton extends View {
         canvas.drawOval(btnCircleRect, btnPaint);
 
         //Drawing icon on top if available
-        if (btnIcon != null) btnIcon.draw(canvas);
+        if (icon != null) icon.draw(canvas);
     }
 
     private int calculateViewPadding() {
