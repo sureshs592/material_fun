@@ -25,11 +25,17 @@ public class FloatingButton extends View {
 
     //Button attributes
     private int btnColor;
-    private Drawable btnIcon;
-    private RectF btnCircleRect;
-    private RectF shadowCircleRect;
     private int btnSize;
     private final float BTN_SIZE_DP = 56f;
+    private RectF btnCircleRect;
+
+    //Icon attributes
+    private Drawable btnIcon;
+    private int btnIconSize;
+    private final float BTN_ICON_SIZE_DP = 24f;
+
+    //Shadow attributes
+    private RectF shadowCircleRect;
 
 
     public FloatingButton(Context context, AttributeSet attrs) {
@@ -53,13 +59,15 @@ public class FloatingButton extends View {
         //Setting layer type to SOFTWARE to make the blur mask filter work (for shadow)
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
+        setupPaints();
+
+        setupDimensions(context);
+    }
+
+    private void setupPaints() {
         //Initialising button background paint
         btnPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         btnPaint.setColor(btnColor);
-
-        //Calculating button size
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        btnSize = (int)((BTN_SIZE_DP * displayMetrics.density) + 0.5);
 
         //Initialising the shadow paint
         if (!isInEditMode()) {
@@ -67,6 +75,13 @@ public class FloatingButton extends View {
             shadowPaint.setColor(Color.argb(255 , 120, 120, 120));
             shadowPaint.setMaskFilter(new BlurMaskFilter(10, BlurMaskFilter.Blur.NORMAL));
         }
+    }
+
+    private void setupDimensions(Context context) {
+        //Calculating button size
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        btnSize = (int)((BTN_SIZE_DP * displayMetrics.density) + 0.5);
+        btnIconSize = (int)((BTN_ICON_SIZE_DP * displayMetrics.density) + 0.5);
     }
 
     @Override
