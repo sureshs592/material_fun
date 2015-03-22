@@ -155,6 +155,7 @@ public class MainActivity extends ActionBarActivity
 
     private void toggleItemList() {
         double endValue = (spring.getEndValue() == 0) ? 1 : 0;
+        spring.setOvershootClampingEnabled(endValue == 0);
         spring.setEndValue(endValue);
     }
 
@@ -167,9 +168,7 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onSpringUpdate(Spring spring) {
-        double currentValue = spring.getCurrentValue();
-        double scale = (currentValue > 0) ? currentValue : 0;
-        miniBtnList.getLayoutParams().height = (int) (listHeight * scale);
+        miniBtnList.getLayoutParams().height = (int) (listHeight * spring.getCurrentValue());
         miniBtnList.requestLayout();
     }
 
@@ -180,10 +179,7 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
-    @Override
-    public void onSpringEndStateChange(Spring spring) {
-
-    }
+    @Override public void onSpringEndStateChange(Spring spring) {}
 
     /**
      * A placeholder fragment containing a simple view.
