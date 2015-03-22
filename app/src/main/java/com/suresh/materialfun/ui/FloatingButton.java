@@ -62,9 +62,11 @@ public class FloatingButton extends View {
         btnSize = (int)((BTN_SIZE_DP * displayMetrics.density) + 0.5);
 
         //Initialising the shadow paint
-        shadowPaint = new Paint(0);
-        shadowPaint.setColor(Color.argb(255 , 120, 120, 120));
-        shadowPaint.setMaskFilter(new BlurMaskFilter(10, BlurMaskFilter.Blur.NORMAL));
+        if (!isInEditMode()) {
+            shadowPaint = new Paint(0);
+            shadowPaint.setColor(Color.argb(255 , 120, 120, 120));
+            shadowPaint.setMaskFilter(new BlurMaskFilter(10, BlurMaskFilter.Blur.NORMAL));
+        }
     }
 
     @Override
@@ -78,10 +80,12 @@ public class FloatingButton extends View {
         shadowCircleRect = new RectF(btnStart + sizeOffset, btnStart + positionOffset,
                 btnEnd - sizeOffset, btnEnd + positionOffset);
 
-        int iconPadding = (int) (btnSize * 0.3);
-        int iconStart = btnStart + iconPadding;
-        int iconEnd = btnEnd - iconPadding;
-        btnIcon.setBounds(iconStart, iconStart, iconEnd, iconEnd);
+        if (btnIcon != null) {
+            int iconPadding = (int) (btnSize * 0.3);
+            int iconStart = btnStart + iconPadding;
+            int iconEnd = btnEnd - iconPadding;
+            btnIcon.setBounds(iconStart, iconStart, iconEnd, iconEnd);
+        }
     }
 
     @Override
@@ -94,9 +98,14 @@ public class FloatingButton extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawOval(shadowCircleRect, shadowPaint);
+        //Drawing shadow (if not in edit mode)
+        if (!isInEditMode()) canvas.drawOval(shadowCircleRect, shadowPaint);
+
+        //Drawing main button circle
         canvas.drawOval(btnCircleRect, btnPaint);
-        btnIcon.draw(canvas);
+
+        //Drawing icon on top if available
+        if (btnIcon != null) btnIcon.draw(canvas);
     }
 
     private int calculateViewPadding() {
