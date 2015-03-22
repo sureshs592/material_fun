@@ -9,5 +9,7 @@
 
     <!-- Floating button dimens -->
     <dimen name="fb_button_size">56dp</dimen>
+    <dimen name="fb_mini_button_size">40dp</dimen>
     <dimen name="fb_icon_size">22dp</dimen>
+    <dimen name="fb_mini_icon_size">18dp</dimen>
 </resources>

@@ -9,17 +9,40 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity$PlaceholderFragment">
 
-    <TextView
-        android:id="@+id/section_label"
+    <LinearLayout
+        android:layout_above="@+id/btnFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Testing"
-        android:textColor="#ffffff"
-        android:gravity="center"
-        android:background="@drawable/label_bg_thin"
-        android:textSize="14sp" />
+        android:layout_alignLeft="@+id/btnFab"
+        android:orientation="vertical">
+
+        <com.suresh.materialfun.ui.FloatingButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fb_buttonColor="#ffcc1d19"
+            app:fb_icon="@drawable/ic_action_new"
+            app:fb_button_type="mini"/>
+
+        <com.suresh.materialfun.ui.FloatingButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fb_buttonColor="#ffcc1d19"
+            app:fb_icon="@drawable/ic_action_new"
+            app:fb_button_type="mini"/>
+
+        <com.suresh.materialfun.ui.FloatingButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fb_buttonColor="#ffcc1d19"
+            app:fb_icon="@drawable/ic_action_new"
+            app:fb_button_type="mini"/>
+
+    </LinearLayout>
+
+
 
     <com.suresh.materialfun.ui.FloatingButton
+        android:id="@+id/btnFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:fb_buttonColor="#ffcc1d19"

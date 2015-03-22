@@ -18,6 +18,8 @@ public class FloatingButton extends View {
 
     private final String TAG = "FloatingButton";
 
+    private enum Type { NORMAL, MINI }
+
     //Drawing tools
     private Paint btnPaint;
     private Paint shadowPaint;
@@ -26,6 +28,7 @@ public class FloatingButton extends View {
     private int btnColor;
     private int btnSize;
     private RectF btnCircleRect;
+    private Type btnType;
 
     //Icon attributes
     private Drawable icon;
@@ -43,6 +46,10 @@ public class FloatingButton extends View {
 
         try {
             btnColor = arr.getColor(R.styleable.FloatingButton_fb_buttonColor, Color.BLACK);
+
+            int typeIndex = arr.getInteger(R.styleable.FloatingButton_fb_button_type, 0);
+            btnType = Type.values()[typeIndex];
+
             int iconRes = arr.getResourceId(R.styleable.FloatingButton_fb_icon, 0);
             if (iconRes != 0) icon = getResources().getDrawable(iconRes);
         } finally {
@@ -75,8 +82,13 @@ public class FloatingButton extends View {
     }
 
     private void setupDimensions(Context context) {
-        btnSize = (int) context.getResources().getDimension(R.dimen.fb_button_size);
-        iconSize = (int) context.getResources().getDimension(R.dimen.fb_icon_size);
+        btnSize = (int) ((btnType == Type.NORMAL)
+                ? context.getResources().getDimension(R.dimen.fb_button_size)
+                : context.getResources().getDimension(R.dimen.fb_mini_button_size));
+
+        iconSize = (int) ((btnType == Type.NORMAL)
+                ? context.getResources().getDimension(R.dimen.fb_icon_size)
+                : context.getResources().getDimension(R.dimen.fb_mini_icon_size));
     }
 
     @Override

@@ -3,5 +3,9 @@
     <declare-styleable name="FloatingButton">
         <attr name="fb_buttonColor" format="color" />
         <attr name="fb_icon" format="reference"/>
+        <attr name="fb_button_type" format="enum">
+            <enum name="normal" value="0"/>
+            <enum name="mini" value="1"/>
+        </attr>
     </declare-styleable>
 </resources>
