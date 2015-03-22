@@ -9,7 +9,6 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.suresh.materialfun.R;
@@ -94,9 +93,7 @@ public class FloatingButton extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int totalPadding = calculateViewPadding() * 2;
-        Log.v(TAG, "total padding = " + totalPadding);
         setMeasuredDimension(btnSize + totalPadding, btnSize + totalPadding);
-        Log.v(TAG, "set dimension = " + (btnSize + totalPadding));
     }
 
     @Override
