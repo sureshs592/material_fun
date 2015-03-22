@@ -10,84 +10,72 @@
     tools:context=".MainActivity$PlaceholderFragment">
 
     <LinearLayout
-        android:id="@+id/listOfItems"
-        android:layout_above="@+id/btnFab"
+        android:id="@+id/miniLabelList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <LinearLayout
+        android:layout_alignTop="@+id/miniBtnList"
+        android:layout_alignBottom="@+id/miniBtnList"
+        android:layout_toLeftOf="@+id/miniBtnList"
+        android:orientation="vertical">
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 1"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:textSize="14sp"
-                android:background="@drawable/label_bg_thin"/>
+            android:text="Item 1"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:background="@drawable/label_bg_thin"/>
 
-            <com.suresh.materialfun.ui.FloatingButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fb_buttonColor="#ffcc1d19"
-                app:fb_icon="@drawable/ic_action_new"
-                app:fb_button_type="mini"/>
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 2"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:textSize="14sp"
-                android:background="@drawable/label_bg_thin"/>
+            android:text="Item 2"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:background="@drawable/label_bg_thin"/>
 
-            <com.suresh.materialfun.ui.FloatingButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fb_buttonColor="#ffcc1d19"
-                app:fb_icon="@drawable/ic_action_new"
-                app:fb_button_type="mini"/>
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 3"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:textSize="14sp"
-                android:background="@drawable/label_bg_thin"/>
-
-            <com.suresh.materialfun.ui.FloatingButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fb_buttonColor="#ffcc1d19"
-                app:fb_icon="@drawable/ic_action_new"
-                app:fb_button_type="mini"/>
-        </LinearLayout>
-
+            android:text="Item 3"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:background="@drawable/label_bg_thin"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/miniBtnList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnFab"
+        android:layout_alignRight="@+id/btnFab"
+        android:layout_above="@+id/btnFab"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
+        <com.suresh.materialfun.ui.FloatingButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fb_buttonColor="#ffcc1d19"
+            app:fb_icon="@drawable/ic_action_new"
+            app:fb_button_type="mini"/>
+
+        <com.suresh.materialfun.ui.FloatingButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fb_buttonColor="#ffcc1d19"
+            app:fb_icon="@drawable/ic_action_new"
+            app:fb_button_type="mini"/>
+
+        <com.suresh.materialfun.ui.FloatingButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fb_buttonColor="#ffcc1d19"
+            app:fb_icon="@drawable/ic_action_new"
+            app:fb_button_type="mini"/>
+    </LinearLayout>
 
     <com.suresh.materialfun.ui.FloatingButton
         android:id="@+id/btnFab"
