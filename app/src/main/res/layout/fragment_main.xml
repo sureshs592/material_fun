@@ -17,7 +17,8 @@
         android:layout_alignRight="@+id/btnFab"
         android:layout_above="@+id/btnFab"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:visibility="gone">
 
         <com.suresh.materialfun.ui.FloatingButton
             android:layout_width="wrap_content"

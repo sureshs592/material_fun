@@ -5,25 +5,26 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import com.facebook.rebound.Spring;
+import com.facebook.rebound.SpringConfig;
+import com.facebook.rebound.SpringListener;
+import com.facebook.rebound.SpringSystem;
 import com.suresh.materialfun.ui.FloatingButton;
 
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, View.OnClickListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+        View.OnClickListener, SpringListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -36,10 +37,13 @@ public class MainActivity extends ActionBarActivity
     private CharSequence mTitle;
 
     /**
-     * Fab views
+     * Fab views and spring animators
      */
     private FloatingButton fabBtn;
-    private LinearLayout fabList;
+    private LinearLayout miniBtnList;
+    private int listHeight;
+    private SpringSystem springSystem;
+    private Spring spring;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,17 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        setupSpringAnimators();
+    }
+
+    private void setupSpringAnimators() {
+        springSystem = SpringSystem.create();
+
+        SpringConfig config = SpringConfig.fromOrigamiTensionAndFriction(62, 6);
+        spring = springSystem.createSpring();
+        spring.setSpringConfig(config);
+        spring.addListener(this);
     }
 
     @Override
@@ -61,7 +76,11 @@ public class MainActivity extends ActionBarActivity
         super.onResume();
 
         fabBtn = (FloatingButton) findViewById(R.id.btnFab);
-        fabList = (LinearLayout) findViewById(R.id.listOfItems);
+        miniBtnList = (LinearLayout) findViewById(R.id.miniBtnList);
+
+        //Measuring the mini button list to get the height
+        miniBtnList.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        listHeight = miniBtnList.getMeasuredHeight();
 
         fabBtn.setOnClickListener(this);
     }
@@ -135,8 +154,35 @@ public class MainActivity extends ActionBarActivity
     }
 
     private void toggleItemList() {
-        int vis = (fabList.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE;
-        fabList.setVisibility(vis);
+        double endValue = (spring.getEndValue() == 0) ? 1 : 0;
+        spring.setEndValue(endValue);
+    }
+
+    @Override
+    public void onSpringActivate(Spring spring) {
+        if (spring.getEndValue() == 1) {
+            miniBtnList.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onSpringUpdate(Spring spring) {
+        double currentValue = spring.getCurrentValue();
+        double scale = (currentValue > 0) ? currentValue : 0;
+        miniBtnList.getLayoutParams().height = (int) (listHeight * scale);
+        miniBtnList.requestLayout();
+    }
+
+    @Override
+    public void onSpringAtRest(Spring spring) {
+        if (spring.getEndValue() == 0) {
+            miniBtnList.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onSpringEndStateChange(Spring spring) {
+
     }
 
     /**
