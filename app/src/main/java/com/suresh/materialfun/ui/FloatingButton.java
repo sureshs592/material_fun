@@ -130,16 +130,4 @@ public class FloatingButton extends View {
     private int calculateViewPadding() {
         return (int) (btnSize * 0.2);
     }
-
-    public int getButtonColor() {
-        return btnColor;
-    }
-
-    public void setButtonColorRes(int resId) {
-        setButtonColor(getResources().getColor(resId));
-    }
-
-    public void setButtonColor(int btnColor) {
-        this.btnColor = btnColor;
-    }
 }
