@@ -85,6 +85,14 @@ public class FloatingButton extends View {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int totalPadding = calculateViewPadding() * 2;
+        Log.v(TAG, "total padding = " + totalPadding);
+        setMeasuredDimension(btnSize + totalPadding, btnSize + totalPadding);
+        Log.v(TAG, "set dimension = " + (btnSize + totalPadding));
+    }
+
+    @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         int viewPadding = calculateViewPadding();
         int btnStart = viewPadding;
@@ -101,14 +109,6 @@ public class FloatingButton extends View {
             int iconEnd = btnEnd - iconPadding;
             btnIcon.setBounds(iconStart, iconStart, iconEnd, iconEnd);
         }
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int totalPadding = calculateViewPadding() * 2;
-        Log.v(TAG, "total padding = " + totalPadding);
-        setMeasuredDimension(btnSize + totalPadding, btnSize + totalPadding);
-        Log.v(TAG, "set dimension = " + (btnSize + totalPadding));
     }
 
     @Override
