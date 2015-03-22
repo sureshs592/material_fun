@@ -8,4 +8,8 @@
             <enum name="mini" value="1"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="FloatingMenu">
+        <attr name="fm_main_action_button" format="reference"/>
+    </declare-styleable>
 </resources>
