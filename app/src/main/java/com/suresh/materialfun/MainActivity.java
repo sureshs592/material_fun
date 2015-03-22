@@ -16,11 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.suresh.materialfun.ui.FloatingButton;
 
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, View.OnClickListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -31,6 +34,12 @@ public class MainActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+
+    /**
+     * Fab views
+     */
+    private FloatingButton fabBtn;
+    private LinearLayout fabList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +54,16 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        fabBtn = (FloatingButton) findViewById(R.id.btnFab);
+        fabList = (LinearLayout) findViewById(R.id.listOfItems);
+
+        fabBtn.setOnClickListener(this);
     }
 
     @Override
@@ -104,6 +123,20 @@ public class MainActivity extends ActionBarActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.btnFab:
+                toggleItemList();
+                break;
+        }
+    }
+
+    private void toggleItemList() {
+        int vis = (fabList.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE;
+        fabList.setVisibility(vis);
     }
 
     /**
