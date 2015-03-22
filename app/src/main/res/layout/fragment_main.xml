@@ -10,42 +10,6 @@
     tools:context=".MainActivity$PlaceholderFragment">
 
     <LinearLayout
-        android:id="@+id/miniLabelList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/miniBtnList"
-        android:layout_alignBottom="@+id/miniBtnList"
-        android:layout_toLeftOf="@+id/miniBtnList"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Item 1"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:textSize="14sp"
-            android:background="@drawable/label_bg_thin"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Item 2"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:textSize="14sp"
-            android:background="@drawable/label_bg_thin"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Item 3"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:textSize="14sp"
-            android:background="@drawable/label_bg_thin"/>
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/miniBtnList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
